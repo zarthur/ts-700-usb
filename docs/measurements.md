@@ -2,7 +2,7 @@
 
 Issue: [#9](https://github.com/zarthur/ts-700-usb/issues/9). Status: **provisional worksheet; no new hardware measurements recorded**. Preparing this document does not satisfy the physical-input acceptance criteria or close #9.
 
-Baseline: [PLAN](../PLAN.md) and [research](research-solutions.md). Historical prototype claims are **reported**, not measurements repeated for this revision. Manufacturer specifications and radio-manual ratings are documentary evidence, not measurements of the actual equipment. In particular, the 500 Ω microphone specification is not measured input resistance or sensitivity; 2 W into 8 Ω implies 4 Vrms only at that rated loaded condition, not a maximum open-circuit output.
+Baseline: [PLAN](../PLAN.md) and [research](research-solutions.md). Historical prototype claims are **reported**, not measurements repeated for this revision. The user additionally reports a sound card supplied with Hyper-X headphones and a working existing prototype on an Apple Silicon MacBook Pro using WSJT-X and a working macOS driver; these reports establish context, not fresh electrical or host-transition verification. Manufacturer specifications and radio-manual ratings are documentary evidence, not measurements of the actual equipment. In particular, the 500 Ω microphone specification is not measured input resistance or sensitivity; 2 W into 8 Ω implies 4 Vrms only at that rated loaded condition, not a maximum open-circuit output.
 
 ## Record conventions
 
@@ -30,8 +30,8 @@ The coordinator records limits from verified component/radio data before each po
 
 | ID | Input and evidence requested | Current status | Decisions/gates blocked |
 |---|---|---|---|
-| IN-001 | Exact external USB sound-card brand, full model, hardware revision, photos of ports/labels; available specifications | Unresolved | RX contact routing, bias blocking, TX/RX values; #13, #16, #17 |
-| IN-002 | Intended computer, OS/build, USB connection/hub, CP210x driver/version, WSJT-X version and serial/PTT/audio settings | Unresolved | Host-state behavior and test matrix; #12, #15, #25 |
+| IN-001 | User reports the external USB sound card came with Hyper-X headphones. Exact model/revision, port/label photos and electrical specifications remain needed. | Reported origin; exact identity unresolved | RX contact routing, bias blocking, TX/RX values; #13, #16, #17 |
+| IN-002 | User reports an Apple Silicon MacBook Pro running WSJT-X, a working macOS driver, and an existing prototype that works well. Exact macOS build, driver identity/version, WSJT-X version, USB connection/hub and serial/PTT/audio settings remain needed. | Reported operation; exact configuration unresolved | Host-state behavior and test matrix; #12, #15, #25 |
 | IN-003 | Actual radio identification and variant; maintenance/modification history relevant to mic/PTT/speaker connections | Unresolved | Applying SP manual evidence to actual unit; #10, #12, #13 |
 | IN-004 | Cable/adapter inventory with IDs, both-end photos and contact views; cable length and shields; working prototype availability | Unresolved | Pinout confirmation and complete isolation; #10, #17, #26 |
 | IN-005 | Exact TRRS jack MPN/drawing and plug dimensions; other connector MPNs and mating cables | Unresolved | Jack-pad mapping and insertion envelopes; #11, #18, #19 |
