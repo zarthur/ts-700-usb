@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="660" viewBox="0 0 1000 660" role="img" aria-labelledby="title desc">
 <title id="title">TS-700SP microphone cable orientation and TRRS mapping</title>
-<desc id="desc">Rear view with notch down: 3 2 above 4 1. Mirrored mating view: 2 3 above 1 4. Tip goes to 1, ring 1 to 4, ring 2 to 2, sleeve to 3. Actual cable and jack pads remain unverified.</desc>
+<desc id="desc">Rear view as printed: 3 2 above 4 1. Mirrored mating view: 2 3 above 1 4. Tip goes to 1, ring 1 to 4, ring 2 to 2, sleeve to 3. Actual cable, key orientation and jack pads remain unverified.</desc>
 <rect width="1000" height="660" fill="#f8fafc"/>
 <g font-family="Arial, sans-serif" fill="#172033">
 <text x="40" y="45" font-size="26" font-weight="bold">TS-700SP MIC/PTT cable contract</text>
@@ -10,8 +10,8 @@
 <text x="118" y="148" font-size="15">Manual's cable connector view</text>
 <text x="590" y="148" font-size="15">Same connector, mirrored</text>
 <g fill="white" stroke="#334155" stroke-width="3">
-<path d="M225 320 A85 85 0 1 1 275 320 Q250 300 225 320Z"/>
-<path d="M685 320 A85 85 0 1 1 735 320 Q710 300 685 320Z"/>
+<circle cx="250" cy="240" r="85"/>
+<circle cx="710" cy="240" r="85"/>
 </g>
 <g fill="#dbeafe" stroke="#2563eb" stroke-width="2">
 <circle cx="216" cy="211" r="20"/><circle cx="284" cy="211" r="20"/><circle cx="216" cy="274" r="20"/><circle cx="284" cy="274" r="20"/>
@@ -21,7 +21,7 @@
 <text x="216" y="219">3</text><text x="284" y="219">2</text><text x="216" y="282">4</text><text x="284" y="282">1</text>
 <text x="676" y="219">2</text><text x="744" y="219">3</text><text x="676" y="282">1</text><text x="744" y="282">4</text>
 </g>
-<text x="210" y="349" font-size="15">Notch down</text><text x="670" y="349" font-size="15">Notch down</text>
+<text x="139" y="349" font-size="15">Physical key orientation unverified</text><text x="599" y="349" font-size="15">Physical key orientation unverified</text>
 <text x="404" y="232" font-size="18">Mirror left/right</text>
 <text x="40" y="395" font-size="20" font-weight="bold">Project-specific TRRS mapping (not a headset pinout)</text>
 <g font-size="18">

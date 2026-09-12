@@ -4,9 +4,9 @@ Status: documentary pin mapping verified; adapter continuity and connector pad m
 
 ## Sources and orientation
 
-The [local Kenwood operating manual](docs/references/ts700sp-operating-manual.pdf), PDF/printed page 6, Figure 3, was visually inspected during this implementation. It explicitly shows the **rear of the microphone connector**: with the illustrated notch at the bottom, upper-left is 3, upper-right 2, lower-left 4, lower-right 1. The microphone is connected between 1 (signal) and 4 (shield); its separate PTT switch connects 2 and 3. The assignment **2 = PTT, 3 = PTT_RETURN** is reported prototype evidence in [the research report](docs/research-solutions.md), not an independently measured distinction established by the switch symbol alone.
+The [local Kenwood operating manual](docs/references/ts700sp-operating-manual.pdf), PDF/printed page 6, Figure 3, was visually inspected during this implementation. It explicitly shows the **rear of the microphone connector**: in the printed drawing, upper-left is 3, upper-right 2, lower-left 4, lower-right 1. The microphone is connected between 1 (signal) and 4 (shield); its separate PTT switch connects 2 and 3. The assignment **2 = PTT, 3 = PTT_RETURN** is reported prototype evidence in [the research report](docs/research-solutions.md), not an independently measured distinction established by the switch symbol alone.
 
-The front/mating view of that same cable connector is a left/right mirror while keeping the notch down: upper-left 2, upper-right 3, lower-left 1, lower-right 4. Do not apply either view to a different connector half without verifying its molded numbering and key. The drawing is an orientation aid, not a dimensioned footprint or an exact part selection.
+The front/mating view of that same cable connector is a left/right mirror in the same page orientation: upper-left 2, upper-right 3, lower-left 1, lower-right 4. Do not apply either view to a different connector half without verifying its molded numbering and key. The drawing is an orientation aid, not a dimensioned footprint or an exact part selection. Physical key/notch orientation is unverified; no key geometry is established by this diagram. Confirm the actual connector key and molded numbering before assembly.
 
 ![Rear and mating connector views and project-specific contact mapping](docs/cables.svg)
 
