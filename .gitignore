@@ -1,2 +1,4 @@
 tmp/
 *.kicad_prl
+reports/*.json
+!reports/.gitkeep
