@@ -1,0 +1,33 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(uuid "0661b7c8-15dc-479d-bc55-a313e8cd3ef4")
+	(paper "A4")
+	(title_block
+		(title "Transformer-coupled TX and RX audio")
+		(rev "A-PROVISIONAL")
+		(comment 1 "NOT FROZEN - NOT FOR FABRICATION")
+	)
+	(lib_symbols)
+	(text "PROVISIONAL interface contract - circuit implementation pending"
+		(at 25.4 30.48 0)
+		(effects (font (size 2.54 2.54)) (justify left bottom))
+		(uuid "b10b8503-0b7a-44ab-b637-c171bc662a57")
+	)
+	(text "Radio-side returns remain distinct: MIC_RETURN, PTT_RETURN and RX_RETURN."
+		(at 25.4 40.64 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "dfc79efe-9dc5-435c-9f7e-c9684aa976cb")
+	)
+	(text "Computer-side audio returns do not cross transformers. Implement circuit and hierarchical labels in issue #16."
+		(at 25.4 48.26 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "a608fdd0-e47e-43da-9876-ffd6ca27c35b")
+	)
+	(text "Reference range: 200-299 — transformers, conditioning and radio/audio connectors."
+		(at 25.4 144.78 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "36a99593-21f5-47bb-af90-631bbd128f80")
+	)
+	(embedded_fonts no)
+)

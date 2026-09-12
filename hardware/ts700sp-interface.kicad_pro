@@ -1,0 +1,47 @@
+{
+  "board": {
+    "design_settings": {
+      "defaults": {},
+      "diff_pair_dimensions": [],
+      "drc_exclusions": [],
+      "rules": {},
+      "track_widths": [],
+      "via_dimensions": []
+    }
+  },
+  "boards": [],
+  "libraries": {
+    "pinned_footprint_libs": [],
+    "pinned_symbol_libs": []
+  },
+  "meta": {
+    "filename": "ts700sp-interface.kicad_pro",
+    "version": 1
+  },
+  "net_settings": {
+    "classes": [],
+    "meta": {
+      "version": 0
+    }
+  },
+  "pcbnew": {
+    "page_layout_descr_file": ""
+  },
+  "sheets": [
+    [
+      "14e9bde7-7ae8-4600-832d-bd26eb29b800",
+      "Root"
+    ],
+    [
+      "ef9468fd-9d0a-4175-9fe0-3f5688e8d488",
+      "USB and isolated PTT"
+    ],
+    [
+      "a032a4ae-c9c3-4da4-a932-28869617bf64",
+      "Isolated TX and RX audio"
+    ]
+  ],
+  "text_variables": {
+    "DESIGN_STATUS": "PROVISIONAL - NOT FOR FABRICATION"
+  }
+}

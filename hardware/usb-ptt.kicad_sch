@@ -1,0 +1,33 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(uuid "007c70fb-7e3e-407d-abe7-f30e50a2a1c2")
+	(paper "A4")
+	(title_block
+		(title "USB-C and isolated PTT")
+		(rev "A-PROVISIONAL")
+		(comment 1 "NOT FROZEN - NOT FOR FABRICATION")
+	)
+	(lib_symbols)
+	(text "PROVISIONAL interface contract - circuit implementation pending"
+		(at 25.4 30.48 0)
+		(effects (font (size 2.54 2.54)) (justify left bottom))
+		(uuid "4cbf94b6-8bbf-496c-b26d-bfed7e7f89ba")
+	)
+	(text "Root interface: COMPUTER_GND is host domain; PTT and PTT_RETURN are floating radio closure terminals."
+		(at 25.4 40.64 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "fb319194-884a-48eb-bc5d-9202a7306dbb")
+	)
+	(text "Do not join COMPUTER_GND to PTT or PTT_RETURN. Implement circuit and hierarchical labels in issue #15."
+		(at 25.4 48.26 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "4f23601b-0a86-4d5b-92b1-0b0ce1419cf2")
+	)
+	(text "Reference range: 100-199 — bridge, control, protection and isolated closure."
+		(at 25.4 144.78 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "af987789-e75d-4b68-b5cd-fcda085791be")
+	)
+	(embedded_fonts no)
+)
