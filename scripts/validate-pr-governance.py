@@ -19,7 +19,8 @@ def field(body: str, label: str) -> str:
 
 def usable(value: str) -> bool:
     lowered = value.lower()
-    return bool(value) and "40-character" not in lowered and "paths, commands" not in lowered and "state none" not in lowered and "non-author" not in lowered
+    placeholders = ("40-character", "paths, commands", "state none", "non-author", "pending", "tbd", "todo")
+    return bool(value) and not any(placeholder in lowered for placeholder in placeholders)
 
 
 def main() -> int:
