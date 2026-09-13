@@ -1,0 +1,65 @@
+name: PR governance
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  governance:
+    name: governance record
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # git diff compares the event's base and head SHAs, so both commits
+          # must be available rather than only the default shallow checkout.
+          fetch-depth: 0
+      - name: Validate the PR record
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          printf '%s' "$PR_BODY" > "$RUNNER_TEMP/pr-body.md"
+          python3 scripts/validate-pr-governance.py --body-file "$RUNNER_TEMP/pr-body.md" --head-sha "$PR_HEAD_SHA" --author "$PR_AUTHOR" --issue-output "$RUNNER_TEMP/issue"
+          gh api "repos/$GITHUB_REPOSITORY/issues/$(cat "$RUNNER_TEMP/issue")" >/dev/null
+      - name: Whitespace and Markdown links
+        run: |
+          git diff --check "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}"
+          python3 scripts/check-markdown-links.py
+      - name: Run portable calculation checks
+        run: |
+          python3 scripts/calculate-ptt.py
+      - name: Detect compatible KiCad CLI for CAD consistency reports
+        id: kicad
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes kicad
+          cli="$(command -v kicad-cli)"
+          version="$($cli version | head -n 1)"
+          mkdir -p reports
+          if case "$version" in 10.*) true ;; *) false ;; esac; then
+            printf '%s\n' "CLI: $cli" "Version: $version" 'Status: compatible KiCad 10.x.' > reports/kicad-cli.txt
+            echo 'compatible=true' >> "$GITHUB_OUTPUT"
+          else
+            printf '%s\n' "CLI: $cli" "Version: $version" 'Status: SKIPPED — hosted CLI is incompatible; this repository requires verified KiCad 10.0.6 (or compatible 10.x). Local KiCad 10 visual/ERC/DRC review remains required.' > reports/kicad-cli.txt
+            echo 'compatible=false' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Verify KiCad 10 CLI capabilities
+        if: steps.kicad.outputs.compatible == 'true'
+        run: KICAD_CLI="$(command -v kicad-cli)" python3 scripts/check-toolchain.py
+      - name: Run ERC/DRC with compatible KiCad 10.x
+        if: steps.kicad.outputs.compatible == 'true'
+        run: KICAD_CLI="$(command -v kicad-cli)" scripts/ci-cad-check.sh
+      - name: Upload check reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-check-reports-${{ github.event.pull_request.number }}
+          path: reports/
+          if-no-files-found: warn

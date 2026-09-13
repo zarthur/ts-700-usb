@@ -1,0 +1,45 @@
+name: Approved squash merge
+
+on:
+  pull_request_target:
+    types: [labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  merge:
+    if: github.event.label.name == 'approved-for-merge' && github.event.pull_request.base.ref == 'main' && github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      # The base branch is trusted. Do not check out or execute PR code here.
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Revalidate the exact current PR head and its required checks
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json body,headRefOid,author --jq '.body' > "$RUNNER_TEMP/pr-body.md"
+          actual_head=$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json headRefOid --jq '.headRefOid')
+          test "$actual_head" = "$EXPECTED_HEAD"
+          author=$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json author --jq '.author.login')
+          python3 scripts/validate-pr-governance.py --body-file "$RUNNER_TEMP/pr-body.md" --head-sha "$actual_head" --author "$author"
+          gh api "repos/$GITHUB_REPOSITORY/commits/$actual_head/check-runs" --jq '.check_runs[] | select(.name == "governance record" and .status == "completed" and .conclusion == "success") | .id' | grep -q .
+          gh pr checks "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --required --watch=false
+      - name: Squash merge the reviewed head
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: gh pr merge "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --squash --delete-branch
+      - name: Verify merged default branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git fetch origin main
+          git checkout --detach origin/main
+          git diff --check origin/main~1 origin/main
+          python3 scripts/check-markdown-links.py
