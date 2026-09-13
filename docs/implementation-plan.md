@@ -8,7 +8,7 @@ Use a root coordinator plus at most three simultaneous subagents. The coordinato
 
 Every task contract specifies issue, base SHA, branch/worktree, allowed files, inputs, unresolved decisions, deliverables, checks and scope exclusions. For electrical tasks also specify shared nets, hierarchical pins, reference ranges and library ownership. Agents return commit SHA, summary, validation and blockers. Stop and coordinate before crossing ownership boundaries.
 
-Use separate issue/<number>-<slug> branches and isolated worktrees for every writer. Preserve user changes. Branch dependent implementation from merged prerequisites; avoid stacked PRs. Independent evidence preparation may start from the baseline, but update to merged conventions before review. One writer per CAD file and one PCB writer throughout placement/routing. Never blindly text-merge CAD conflicts.
+Use separate issue/<number>-<slug> branches and isolated worktrees for every writer. Preserve user changes. Branch dependent implementation from merged prerequisites; avoid stacked PRs. Independent evidence preparation may start from the baseline, but update to merged conventions before review. One writer per CAD file and one PCB writer throughout placement/routing. Never blindly text-merge CAD conflicts. The coordinator-owned [CAD-completion contract](cad-completion.md) fixes sheet interfaces, references and defaults before #15/#16.
 
 Use one PR per issue by default. PR bodies identify behavior/artifacts, issue links, evidence, warnings and provisional inputs. Use Refs for partial delivery and Closes only for satisfied acceptance criteria. Refresh after intervening merges and rerun affected checks. Independent review names the exact final SHA; changes require renewed review/checks. Coordinator may squash-merge passing PRs without further user approval, respecting protections. If GitHub prohibits author approval, put actual independent subagent review identity/SHA in the PR body; do not invent a GitHub approval.
 
@@ -39,7 +39,7 @@ Coordinator reconciles grounds and components; independent verifier recalculates
 2. Separate agents #15 and #16 exclusively own USB/PTT and audio child sheets. Shared library changes return to library owner. Annotate provisional/DNP values visibly.
 3. Coordinator integrates #17; independent reviewer inspects every sheet in KiCad, ERC, intended connectivity and exported PDF/BOM.
 
-Verify no unresolved library paths, computer supply onto radio signals, stereo short, winding DC, incorrect transistor/diode orientation or accidental ground bypass. Check connector mapping independently from ERC. Merge #14 then refreshed #15/#16 sequentially then #17. First implementation milestone: zero unexplained ERC errors, justified warnings, complete connectivity/visual evidence and all measurement-dependent freeze inputs resolved.
+Verify no unresolved library paths, computer supply onto radio signals, stereo short, winding DC, incorrect transistor/diode orientation or accidental ground bypass. Check connector mapping independently from ERC. Merge #14 then refreshed #15/#16 sequentially then #17. First implementation milestone: zero unexplained ERC errors, justified warnings, complete connectivity/visual evidence and all measurement-dependent freeze inputs resolved. A separate provisional CAD-completion milestone may use documented defaults while retaining its physical-finalization gate.
 
 ## Epic #4: physical model (#18–19)
 

@@ -39,4 +39,4 @@ Sources: [PLAN](PLAN.md), [research](docs/research-solutions.md), [operating man
 
 Computer domain: USB supply/return, serial bridge/control, sound-card cable returns. Radio domain: floating PTT output plus isolated TX/RX transformer windings. MIC_RETURN, PTT_RETURN and RX_RETURN must be named separately. USB shield termination and metal mounting must not bypass isolation. Document and test the complete cable assembly, not only bare PCB copper.
 
-Before child-sheet implementation the coordinator assigns reference ranges and exact hierarchical pins. Provisional values must be visible in CAD and review exports. No schematic freeze until the affected unresolved rows above are resolved.
+Before child-sheet implementation the coordinator assigns reference ranges and exact hierarchical pins. Provisional values must be visible in CAD and review exports. [Provisional CAD completion](docs/cad-completion.md) is permitted with documented defaults; no schematic freeze, fabrication, or validation claim is permitted until the affected unresolved rows above are resolved.
