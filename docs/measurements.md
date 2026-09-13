@@ -37,10 +37,21 @@ The coordinator records limits from verified component/radio data before each po
 | IN-005 | Exact TRRS jack MPN/drawing and plug dimensions; other connector MPNs and mating cables | Unresolved | Jack-pad mapping and insertion envelopes; #11, #18, #19 |
 | IN-006 | Enclosure material/internal dimensions or explicit unenclosed prototype choice; mounting method, hardware, height/access constraints | Unresolved | Board outline, insulation and mechanical freeze; #18, #19 |
 | IN-007 | Fabricator/assembler and service tier; two-layer stackup/capability table, BOM/CPL format and through-hole responsibilities | Unresolved | Routing rules, sourcing and release; #20, #22, #23 |
-| IN-008 | Populate or omit approximately 20 s FT8 timeout, after reviewing duration/tolerance, Tune cutoff and early-release/rearm behavior | Unresolved | Timeout circuit/population and schematic freeze; #12, #15, #17 |
+| IN-008 | **Selected:** populate the approximately 20 s non-retriggerable FT8 timeout. Record the final circuit, timing tolerance, Tune cutoff, early-release and rearm behavior from the populated assembly. | Selected policy; electrical and host-transition proof unresolved | #12, #15, #17 freeze |
 | IN-009 | Available DMM, oscilloscope/probes, current-limited supply, signal generator/audio capture, suitable loads and RF test equipment; physical operator | Unresolved | Selecting executable measurement procedures and #25–#27 |
 
 TRRS use is settled; IN-005 concerns the physical jack and cable, not reconsidering connector type. IN-006 does not expand scope to custom enclosure design. Missing inputs permit documented provisional work but do not waive the listed gates.
+
+## Concise evidence request for the operator
+
+Please provide the following before any final schematic freeze. These requests do not authorize radio operation; collect cable continuity only with the radio powered off.
+
+1. Photographs of the sound-card labels, connectors, and cable ends; its exact model/revision; and the Mac model, macOS version, driver, WSJT-X version, serial/PTT settings, audio routing, gain/AGC/enhancement settings, and hub/adapter path.
+2. Photographs and IDs for the radio, adapter, TRRS cable, RX cable, existing prototype, and every connector. Include each connector's mating/rear view, cable length, shields, and any known modification history.
+3. Manufacturer drawings or exact MPNs for the TRRS jack, mating plug, and other chosen connectors; caliper measurements of insertion, mounting, height, and clearance envelopes; plus enclosure/mounting constraints or confirmation that the prototype is unenclosed.
+4. The intended fabricator/assembler, two-layer capability table, BOM/CPL format, sourcing policy, and through-hole assembly responsibility.
+5. Available bench equipment and its model/calibration status: DMM, high-impedance scope/probes, current-limited supply, audio generator/capture, reviewed PTT fixture/load, and appropriate RF-load test setup. Identify the physical operator.
+6. Actual readings entered using ME-001 through ME-012, including conditions, raw evidence, meter ranges/uncertainty, tested board revision, and the numeric acceptance limit/source. The radio/RF sequence ME-013 remains after bench and isolation acceptance.
 
 ## Measurement queue and methods
 
