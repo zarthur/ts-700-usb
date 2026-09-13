@@ -4,7 +4,7 @@
 
 Use active-low CP2102N `/RTS` through inversion and an AND gate qualified by `SUSPENDb`. Pull `/RTS` high and pull `SUSPENDb` low (10 kOhm) so power-up, reset, and suspend are open. Use a transistor LED driver for the PhotoMOS and a separate status LED driver. A PhotoMOS output connects only across `PTT` and `PTT_RETURN`.
 
-Populate a non-retriggerable 20-second limiter. It is a transmission bound, not application-health or sound-card-loss detection. Validate slow ramps, brownout, sleep, reconnect, early release, stuck RTS and rearm before radio connection.
+Populate a non-retriggerable approximately 20-second limiter. It is a transmission bound, not application-health or sound-card-loss detection. The selected population does not freeze its circuit: verify the measured radio PTT envelope, PhotoMOS/driver margins, timing tolerance, slow ramps, brownout, sleep, reconnect, early release, stuck RTS and rearm before radio connection. Early release does not reset the active window; a new request must satisfy the documented non-retriggerable rearm behavior.
 
 ## Audio and grounding
 
