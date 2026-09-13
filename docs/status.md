@@ -20,4 +20,4 @@ Updated: 2026-09-13 after merged PRs #37, #39–#42. No physical measurements, f
 
 | #36 | automation coordinator | merged #42 | none | PR governance, compatible-host CAD-report handling, and approved-squash workflow integrated | Enable Actions workflow write permission before unattended merge; physical/visual gates remain manual evidence |
 
-Resume by collecting #9/#10 evidence while assigning isolated worktrees for the now-ready provisional schematic work. The coordinator must assign exact hierarchical pins, named nets, reference ranges and file ownership before #15/#16. Do not route before placement review or release before board/provider gates.
+Current CAD-first work: #47 defines the coordinator contract, then #15/#16 implement a complete provisional model using documented defaults. Human measurements are deferred to physical finalization; they do not block provisional CAD/PCB/review artifacts. Do not call the result frozen, fabrication-ready, or validated before the later physical gates.
