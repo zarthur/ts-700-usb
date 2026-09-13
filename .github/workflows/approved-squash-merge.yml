@@ -29,7 +29,15 @@ jobs:
           author=$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json author --jq '.author.login')
           python3 scripts/validate-pr-governance.py --body-file "$RUNNER_TEMP/pr-body.md" --head-sha "$actual_head" --author "$author"
           gh api "repos/$GITHUB_REPOSITORY/commits/$actual_head/check-runs" --jq '.check_runs[] | select(.name == "governance record" and .status == "completed" and .conclusion == "success") | .id' | grep -q .
-          gh pr checks "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --required --watch=false
+          # Unprotected branches have no configured required checks. The
+          # explicit successful governance record above remains mandatory;
+          # accept only GitHub CLI's documented empty-required-checks result.
+          if ! required_output=$(gh pr checks "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --required --watch=false 2>&1); then
+            case "$required_output" in
+              *"no required checks reported"*) ;;
+              *) printf '%s\n' "$required_output" >&2; exit 1 ;;
+            esac
+          fi
       - name: Squash merge the reviewed head
         env:
           GH_TOKEN: ${{ github.token }}
