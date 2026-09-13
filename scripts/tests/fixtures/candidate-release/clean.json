@@ -1,0 +1,7 @@
+{
+  "$schema": "https://schemas.kicad.org/erc.v1.json",
+  "sheets": [
+    {"path": "/", "violations": []},
+    {"path": "/Child/", "violations": []}
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "violations": [
+    {"type": "erc", "description": "top-level test violation"}
+  ],
+  "sheets": [{"path": "/", "violations": []}]
+}
