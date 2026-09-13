@@ -1,8 +1,26 @@
 # Component evidence register — provisional Rev A
 
-Issue: [#11](https://github.com/zarthur/ts-700-usb/issues/11). Evidence checked September 12, 2026. This is a selection and library-audit record, not a released BOM. `Verified` below applies only to the stated documentary fact; no hardware, supplier inventory, assembly process, or complete footprint has been independently validated.
+Issue: [#11](https://github.com/zarthur/ts-700-usb/issues/11). Evidence checked September 13, 2026. This is a selection and library-audit record, not a released BOM. `Verified` below applies only to the stated documentary fact; no hardware, supplier inventory, assembly process, or complete footprint has been independently validated.
 
 The external sound card came with Hyper-X headphones; exact model remains unknown. The user reports working operation with an Apple Silicon MacBook Pro and WSJT-X. That does not establish microphone contact assignment, bias, impedances, maximum levels, or the serial bridge driver behavior.
+
+## Evidence interpretation and selection ledger
+
+An **exact candidate** is an orderable manufacturer part number that is sufficiently identified to investigate; it is not an approved populated component. Manufacturer documents establish only the cited electrical or mechanical fact. A distributor or assembly-provider record is a separate, time-sensitive sourcing fact and must include provider, retrieval date, stock/lead-time, orderable SKU, substitute policy, and evidence URL or quotation. No such provider record is currently attached to this issue.
+
+| Function | Exact candidate / quantity where known | Manufacturer evidence captured | Footprint/pad and mechanical evidence still required | Mating / provider gate |
+|---|---|---|---|---|
+| USB bridge | CP2102N-A02-GQFN24-R / 1 | Ordering page and Rev. 1.5 datasheet pp. 2, 29–30, 37–40 | Full QFN land, paste, mask, exposed-pad, and pin-1 overlay | Reflow capability and live provider SKU/stock |
+| USB-C receptacle | GCT USB4105-GF-A / 1 proposed | Family drawing/specification identified, not fully audited | Exact suffix drawing revision, all SMT and shell lands, board-edge and insertion envelope | Cable clearance, shell process, provider capability |
+| USB data ESD | TPD2EUSB30DRTR / 1 proposed | SLVSAC2G pp. 3–5 and ordering addendum | DRT land/mask/paste overlay and clamp-context review | Fine-pitch assembly capability and provider record |
+| PTT logic | SN74LVC1G04DBVR and SN74LVC1G08DBVR / 1 each proposed | TI datasheets and ordering pages cited below | SOT-23-5 land overlay and pin-1 orientation | Provider record |
+| LED driver | MMBT3904,215 / 1 proposed | Nexperia datasheet and ordering record cited below | SOT-23 land overlay and symbol-pin audit | Provider record |
+| Isolated closure | AQY212GS / 1 proposed | Panasonic product specification cited below | SOP4 pin 1, input/output polarity, lands, mask/paste, and isolation geometry | Tube-handling/assembly policy and provider record |
+| Audio transformers | LM-NP-1001-B1L / 2 proposed | Bourns drawing/data sheet pp. 1–2 | Bottom-view pin pairs, drill pattern, body/height and lead clearance | Through-hole responsibility and provider/manual-install decision |
+| Radio TRRS | SJ-43514 / 1 proposed | Same Sky data sheet pp. 1–2 | Top-view pad coordinates, drill pattern, edge datum, body and cable envelope | Measured radio PTT versus 16 V/300 mA rating; provider/manual-install decision |
+| TX/RX adjustments | 3296W-1-102LF / 2 proposed | Bourns 3296 data sheet | Terminal order, drill pattern, top-adjust access, body/height | Actual #13 resistance requirement and manual-install decision |
+
+Open functions without even a provisional MPN are the sound-card-facing audio connectors, passive values/packages, USB VBUS fuse/TVS, CC protection, and any timeout/arming parts selected by #12. They are intentionally absent from a populated BOM. This ledger must not be used to imply that every Rev A component is selected.
 
 ## USB bridge
 
@@ -65,6 +83,18 @@ Audio input/output jacks other than radio TRRS remain unselected: the unknown Hy
 ## Sourcing, assembly and closure gate
 
 Manufacturer ordering pages demonstrate part-number existence, not current assembler stock. TI AND-page stock was unavailable in the retrieved view; no quantity, price or lead-time commitment is recorded. Provider selection is unknown. Tube AQY212GS, through-hole transformers/jacks/trimmers, and fine-pitch USB/QFN parts require explicit assembly responsibility and process review in #22.
+
+The following evidence requests are the remaining #11 handoff, separated so that a later sourcing snapshot cannot be mistaken for manufacturer qualification:
+
+| Evidence owner / source | Required record | Decision it unlocks |
+|---|---|---|
+| Manufacturer drawing review | PDF revision/page, saved visual overlay or review note, pad/pin/dimension comparison, orientation/view, reviewer, and any discrepancy | Exact KiCad footprint/symbol approval and placement |
+| Radio/cable measurement (#9/#10) | Radio-off continuity; PTT open voltage/current; connector/cable dimensions and mating orientation | SJ-43514 electrical suitability and custom pad mapping |
+| Audio measurements (#9/#13) | Endpoint levels, bias, impedance/loading, channel/contact routing and clipping conditions | Audio connector, transformer/trimmer, capacitor and protection selection |
+| Assembly provider (#22) | Provider identity, date, SKU/MPN match, stock/lead time, assembly class/capability, substitution and manual-install policy | Release BOM/CPL and process approval |
+| Independent CAD reviewer | Exact source SHA; symbol pin-to-pad, drills, courtyard, mask/paste and model-scope check | Library/footprint acceptance without fabricated geometry |
+
+Do not represent supplier web availability as an approved substitute or an electrical verification. A provider snapshot expires and must be refreshed at release; it cannot waive the manufacturer drawing, measured-interface, or independent CAD-review gates.
 
 Before closing #11:
 
