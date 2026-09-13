@@ -1,0 +1,47 @@
+name: PR governance
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  governance:
+    name: governance record
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate the PR record
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          printf '%s' "$PR_BODY" > "$RUNNER_TEMP/pr-body.md"
+          python3 scripts/validate-pr-governance.py --body-file "$RUNNER_TEMP/pr-body.md" --head-sha "$PR_HEAD_SHA" --author "$PR_AUTHOR" --issue-output "$RUNNER_TEMP/issue"
+          gh api "repos/$GITHUB_REPOSITORY/issues/$(cat "$RUNNER_TEMP/issue")" >/dev/null
+      - name: Whitespace and Markdown links
+        run: |
+          git diff --check "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}"
+          python3 scripts/check-markdown-links.py
+      - name: Run portable calculation checks
+        run: |
+          python3 scripts/calculate-ptt.py
+      - name: Install KiCad CLI for CAD consistency reports
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes kicad
+          KICAD_CLI="$(command -v kicad-cli)" python3 scripts/check-toolchain.py
+      - name: Run ERC/DRC where KiCad CLI is available
+        run: KICAD_CLI="$(command -v kicad-cli)" scripts/ci-cad-check.sh
+      - name: Upload check reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-check-reports-${{ github.event.pull_request.number }}
+          path: reports/
+          if-no-files-found: warn
