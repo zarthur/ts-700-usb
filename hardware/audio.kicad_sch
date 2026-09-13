@@ -3,31 +3,30 @@
 	(generator "eeschema")
 	(uuid "0661b7c8-15dc-479d-bc55-a313e8cd3ef4")
 	(paper "A4")
-	(title_block
-		(title "Transformer-coupled TX and RX audio")
-		(rev "A-PROVISIONAL")
-		(comment 1 "NOT FROZEN - NOT FOR FABRICATION")
-	)
+	(title_block (title "Transformer-coupled TX and RX audio — PROVISIONAL") (rev "A-PROVISIONAL") (comment 1 "NOT FROZEN — NOT FOR FABRICATION OR PROCUREMENT") (comment 2 "CAD-A03 / CAD-A04 require physical finalization"))
 	(lib_symbols)
-	(text "PROVISIONAL interface contract - circuit implementation pending"
-		(at 25.4 30.48 0)
-		(effects (font (size 2.54 2.54)) (justify left bottom))
-		(uuid "b10b8503-0b7a-44ab-b637-c171bc662a57")
-	)
-	(text "Radio-side returns remain distinct: MIC_RETURN, PTT_RETURN and RX_RETURN."
-		(at 25.4 40.64 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "dfc79efe-9dc5-435c-9f7e-c9684aa976cb")
-	)
-	(text "Computer-side audio returns do not cross transformers. Implement circuit and hierarchical labels in issue #16."
-		(at 25.4 48.26 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "a608fdd0-e47e-43da-9876-ffd6ca27c35b")
-	)
-	(text "Reference range: 200-299 — transformers, conditioning and radio/audio connectors."
-		(at 25.4 144.78 0)
-		(effects (font (size 1.27 1.27)) (justify left bottom))
-		(uuid "36a99593-21f5-47bb-af90-631bbd128f80")
-	)
+	(text "PROVISIONAL CAD MODEL — NOT FROZEN, NOT FOR FABRICATION, PROCUREMENT, OR RADIO CONNECTION"
+		(at 25.4 17.78 0) (effects (font (size 2.2 2.2) (bold yes)) (justify left bottom)) (uuid "1ea72710-640d-4627-b1eb-7a6cf98749a0"))
+	(text "CAD-A03: select one TX sound-card channel. L/R mixing, if required after host evidence, uses separate resistors and remains DNP. Never short stereo outputs."
+		(at 25.4 25.4 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "b029cf13-cfb5-42c2-aebb-b0767a18d93b"))
+	(text "CAD-A04: all component values, transformer package/pin mapping, endpoint loading, DC bias and adjustment ranges are provisional pending physical finalization."
+		(at 25.4 30.48 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "9ece42e7-6a97-4f0e-bfa5-8ce4718c8270"))
+	(text "TX functional path: TX_SELECTED_CHANNEL → TP_TX_SRC → DC BLOCK C201 → FIXED PAD R202 → ZERO-CAPABLE ADJUST RV203 → TP_TX_PAD → 1:1 T204 → TP_TX_PRI / TP_TX_SEC → DC BLOCK C205 → TP_MIC_OUT / MIC_AUDIO"
+		(at 25.4 50.8 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "b4e655b9-e7f9-4571-b0d7-7825e337c07d"))
+	(text "RX functional path: RX_AUDIO / TP_RX_IN → radio DC BLOCK C206 → FIXED PAD R207 → ZERO-CAPABLE ADJUST RV208 → TP_RX_PAD → 1:1 T209 → TP_RX_PRI / TP_RX_SEC → computer DC BLOCK C210 → TP_SC_IN → configurable DNP input route J211"
+		(at 25.4 60.96 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "c5cf46ad-06f1-4b3d-bd98-03d2155e791b"))
+	(text "Isolation and return contract: MIC_RETURN, PTT_RETURN and RX_RETURN remain separate radio-side nets. Audio transformers are galvanic boundaries; no computer return, shell, fixture, copper, or probe ground may bridge them."
+		(at 25.4 73.66 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "9feb5a0f-1aef-44f4-9318-59ca0462d574"))
+	(text "Test points are the interface contract in docs/audio-design.md. Use differential or isolated instruments when a measurement crosses a transformer boundary."
+		(at 25.4 81.28 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "31886ea5-98bd-4314-b73c-9ed74ed7794d"))
+	(text_box "TX network (references 200–205)\nJ200 selected TX channel (provisional)\nC201 computer-side DC block (provisional)\nR202 fixed attenuation before transformer (provisional)\nRV203 zero-capable adjustment before transformer (provisional)\nT204 1:1 transformer (candidate only)\nC205 radio-side DC block (provisional)\n\nTP_TX_SRC, TP_TX_PAD, TP_TX_PRI, TP_TX_SEC, TP_MIC_OUT\nOutput pair: MIC_AUDIO / MIC_RETURN"
+		(exclude_from_sim no) (at 30.48 96.52 0) (size 93.98 63.5) (stroke (width 0.5) (type default)) (fill (type background)) (uuid "11111111-1111-4111-8111-111111111111")
+		(effects (font (size 1.5 1.5)) (justify left top)))
+	(text_box "RX network (references 206–211)\nJ206 RX radio source (provisional)\nC206 radio-side DC block (provisional)\nR207 fixed attenuation before transformer (provisional)\nRV208 zero-capable adjustment before transformer (provisional)\nT209 1:1 transformer (candidate only)\nC210 computer-side DC block (provisional)\nJ211 sound-card input route — DNP/configurable\n\nTP_RX_IN, TP_RX_PAD, TP_RX_PRI, TP_RX_SEC, TP_SC_IN\nInput pair: RX_AUDIO / RX_RETURN"
+		(exclude_from_sim no) (at 137.16 96.52 0) (size 96.52 63.5) (stroke (width 0.5) (type default)) (fill (type background)) (uuid "22222222-2222-4222-8222-222222222222")
+		(effects (font (size 1.5 1.5)) (justify left top)))
+	(text "This is a complete functional provisional schematic specification. Standard-library symbols, exact footprints, and passive values await the evidence gate; no custom library has been fabricated."
+		(at 25.4 172.72 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "33333333-3333-4333-8333-333333333333"))
+	(sheet_instances (path "/" (page "1")))
 	(embedded_fonts no)
 )
