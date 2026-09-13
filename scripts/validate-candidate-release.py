@@ -34,9 +34,27 @@ def digest(path: Path) -> str:
 
 def report_has_violations(path: Path) -> bool:
     try:
-        return bool(json.loads(path.read_text(encoding="utf-8")).get("violations"))
+        report = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as error:
         fail(f"invalid KiCad JSON report {path}: {error}")
+
+    if not isinstance(report, dict):
+        fail(f"invalid KiCad JSON report {path}: root must be an object")
+
+    def has_violations(node: object) -> bool:
+        if isinstance(node, dict):
+            if "violations" in node:
+                violations = node["violations"]
+                if not isinstance(violations, list):
+                    fail(f"invalid KiCad JSON report {path}: violations must be a list")
+                if violations:
+                    return True
+            return any(has_violations(child) for child in node.values())
+        if isinstance(node, list):
+            return any(has_violations(child) for child in node)
+        return False
+
+    return has_violations(report)
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)

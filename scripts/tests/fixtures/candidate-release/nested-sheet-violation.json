@@ -1,0 +1,11 @@
+{
+  "sheets": [
+    {
+      "path": "/",
+      "violations": [],
+      "children": [
+        {"path": "/Audio/", "violations": [{"type": "erc", "description": "nested test violation"}]}
+      ]
+    }
+  ]
+}
