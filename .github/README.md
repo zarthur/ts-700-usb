@@ -2,7 +2,10 @@
 
 `PR governance` validates the required documentary record, repository-relative
 Markdown links, whitespace, portable scripts, and KiCad ERC/DRC reports. It
-installs KiCad on the hosted runner before the CAD checks. ERC/DRC report artifacts are consistency evidence;
+installs KiCad on the hosted runner, but runs the CAD checks only with a
+compatible KiCad 10.x CLI. An incompatible hosted CLI writes a clearly marked
+skipped report instead; local KiCad 10 visual/ERC/DRC review remains required.
+ERC/DRC report artifacts are consistency evidence;
 they do not certify visual KiCad review, dimensions, hardware measurements, or
 radio/RF validation.
 
